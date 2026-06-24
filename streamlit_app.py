@@ -1,3 +1,9 @@
+import subprocess
+import sys
+
+# FORCE INSTALL - This runs before anything else
+subprocess.check_call([sys.executable, "-m", "pip", "install", "openpyxl", "-q"])
+
 import streamlit as st
 import pandas as pd
 import io
@@ -84,10 +90,8 @@ if uploaded_file is not None:
         st.error(f"❌ An error occurred: {str(e)}")
 
 else:
-    # Empty state
     st.info("👆 Upload a CSV file to get started")
     
-    # Example section
     with st.expander("📋 Supported Features"):
         st.markdown("""
         - **Encoding:** UTF-8, Latin-1, etc. (auto-detected)
@@ -95,16 +99,6 @@ else:
         - **Large Files:** Handles files with 100,000+ rows
         - **Output:** Excel .xlsx format
         """)
-    
-    with st.expander("💡 Tips"):
-        st.markdown("""
-        1. Ensure your CSV has headers in the first row
-        2. Dates are automatically converted to Excel date format
-        3. Numbers are preserved without losing precision
-        4. Special characters and Unicode are supported
-        """)
 
-
-# --- Footer ---
 st.divider()
-st.caption("Built with Streamlit & Pandas | No data leaves your browser")
+st.caption("Built with Streamlit & Pandas")
